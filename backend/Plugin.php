@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Neucore\Plugin\Test;
+namespace Neucore\Plugin\Example;
 
 use Neucore\Plugin\Core\EsiClientInterface;
 use Neucore\Plugin\Core\Exception;

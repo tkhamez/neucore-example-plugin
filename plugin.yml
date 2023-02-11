@@ -8,10 +8,10 @@
 name: Example
 
 # Full class name of class implementing Neucore\Plugin\ServiceInterface or Neucore\Plugin\GeneralInterface.
-phpClass: Neucore\Plugin\Test\Plugin
+phpClass: Neucore\Plugin\Example\Plugin
 
 # PHP namespace that should be loaded by the PSR-4 autoloader.
-psr4Prefix: Neucore\Plugin\Test
+psr4Prefix: Neucore\Plugin\Example
 
 # Relative (to this file) path to the directory containing the classes of the above namespace.
 psr4Path: backend
