@@ -7,7 +7,9 @@ namespace Neucore\Plugin\Example;
 use Neucore\Plugin\Core\EsiClientInterface;
 use Neucore\Plugin\Core\Exception;
 use Neucore\Plugin\Core\FactoryInterface;
+use Neucore\Plugin\Core\OutputInterface;
 use Neucore\Plugin\Data\CoreAccount;
+use Neucore\Plugin\Data\CoreRole;
 use Neucore\Plugin\Data\NavigationItem;
 use Neucore\Plugin\Data\PluginConfiguration;
 use Neucore\Plugin\GeneralInterface;
@@ -90,8 +92,19 @@ class Plugin implements GeneralInterface
     public function getNavigationItems(): array
     {
         return [
-            new NavigationItem(NavigationItem::PARENT_ROOT, 'Example Plugin', '/index', '_self'),
+            new NavigationItem(
+                NavigationItem::PARENT_ROOT,
+                'Example Plugin',
+                '/index',
+                '_self',
+                [CoreRole::ANONYMOUS, CoreRole::USER]
+            ),
         ];
+    }
+
+    public function command(array $arguments, array $options, OutputInterface $output): void
+    {
+        $output->writeLine('Done.');
     }
 
     private function jsonResponse(ResponseInterface $response, array $data): ResponseInterface
