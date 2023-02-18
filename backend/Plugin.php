@@ -104,7 +104,8 @@ class Plugin implements GeneralInterface
 
     public function command(array $arguments, array $options, OutputInterface $output): void
     {
-        $output->writeLine('Done.');
+        $playerId = $this->factory->getData()->getPlayerId(96061222);
+        $output->writeLine('Player Id of character 96061222 is ' . ($playerId ?: 'unknown') . '.');
     }
 
     private function jsonResponse(ResponseInterface $response, array $data): ResponseInterface
