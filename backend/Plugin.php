@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Neucore\Plugin\Example;
 
-use Neucore\Plugin\Core\EsiClientInterface;
 use Neucore\Plugin\Core\Exception;
 use Neucore\Plugin\Core\FactoryInterface;
 use Neucore\Plugin\Core\OutputInterface;
@@ -66,14 +65,17 @@ class Plugin implements GeneralInterface
                 'result' => null,
                 'error' => null,
             ];
-            $num = $request->getQueryParams()['num'] ?? '1';
             $charId = $coreAccount->main->id;
             try {
-                $esiResponse = $this->factory->getEsiClient()->request(
-                    esiPath: $num === '1' ? "/latest/characters/$charId/wallet/" : "/latest/characters/$charId/",
-                    characterId: $num === '1' ? $charId : null,
-                    eveLoginName: $num === '1' ? 'wallet' : EsiClientInterface::DEFAULT_LOGIN_NAME,
-                );
+                if (($request->getQueryParams()['num'] ?? '1') === '1') {
+                    $esiResponse = $this->factory->getEsiClient()->request(
+                        "/latest/characters/$charId/wallet/",
+                        characterId: $charId,
+                        eveLoginName: 'wallet',
+                    );
+                } else { // num = 2
+                    $esiResponse = $this->factory->getEsiClient()->request("/latest/characters/$charId/");
+                }
             } catch (Exception $e) {
                 $json['error'] = $e->getMessage();
                 return $this->jsonResponse($response, $json);
