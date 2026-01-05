@@ -5,7 +5,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "tkhamez/neucore-plugin": "^4.0"
+        "tkhamez/neucore-plugin": "^6.1"
     },
     "config": {
         "platform": {

@@ -59,7 +59,7 @@ class Plugin implements GeneralInterface
         // Ajax request, return ESI data.
         if ($name === 'esi') {
             if (!$coreAccount) {
-                return $response->withStatus(403); // not authorized
+                return $response->withStatus(403); // not authorised
             }
             $json = [
                 'result' => null,
