@@ -20,14 +20,11 @@ class Plugin implements GeneralInterface
 {
     public function __construct(
         LoggerInterface $logger,
-        private PluginConfiguration $configuration,
-        private FactoryInterface $factory,
-    ) {
-    }
+        private readonly PluginConfiguration $configuration,
+        private readonly FactoryInterface $factory,
+    ) {}
 
-    public function onConfigurationChange(): void
-    {
-    }
+    public function onConfigurationChange(): void {}
 
     public function request(
         string $name,
@@ -35,7 +32,6 @@ class Plugin implements GeneralInterface
         ResponseInterface $response,
         ?CoreAccount $coreAccount,
     ): ResponseInterface {
-
         // Redirect to frontend
         if ($name === 'index') {
             return $response
@@ -99,7 +95,7 @@ class Plugin implements GeneralInterface
                 'Example Plugin',
                 '/index',
                 '_self',
-                [CoreRole::ANONYMOUS, CoreRole::USER]
+                [CoreRole::ANONYMOUS, CoreRole::USER],
             ),
         ];
     }
@@ -112,10 +108,10 @@ class Plugin implements GeneralInterface
 
     private function jsonResponse(ResponseInterface $response, array $data): ResponseInterface
     {
-        $json = (string)json_encode($data);
+        $json = (string) json_encode($data);
         $response->getBody()->write($json);
         return $response
             ->withHeader('Content-Type', 'application/json')
-            ->withHeader('Content-Length', (string)strlen($json));
+            ->withHeader('Content-Length', (string) strlen($json));
     }
 }
